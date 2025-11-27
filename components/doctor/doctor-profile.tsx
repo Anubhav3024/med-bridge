@@ -1,41 +1,67 @@
-"use client"
+"use client";
 
-import type { User } from "@/app/page"
-import { useState } from "react"
-import { ArrowRight, Mail, Briefcase, MapPin, Clock, DollarSign, Save, Pencil, X, Camera } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import type { User } from "@/app/page";
+import { useState } from "react";
+import {
+  ArrowRight,
+  Mail,
+  Briefcase,
+  MapPin,
+  Clock,
+  DollarSign,
+  Save,
+  Pencil,
+  X,
+  Camera,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface DoctorProfileProps {
-  user: User
-  onViewAppointments: () => void
+  user: User;
+  onViewAppointments: () => void;
 }
 
-export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+export function DoctorProfile({
+  user,
+  onViewAppointments,
+}: DoctorProfileProps) {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const [profileData, setProfileData] = useState({
     name: user.username,
     specialization: "Cardiologist",
-    experience: "15",
+    experience: "14",
     description:
       "Experienced cardiologist with over 15 years of practice. Specialized in interventional cardiology and heart failure management. Committed to providing compassionate care to all patients.",
     profileImage: "/professional-doctor-portrait.png",
-  })
+  });
 
-  const [editData, setEditData] = useState(profileData)
+  const [editData, setEditData] = useState(profileData);
 
   const [schedule, setSchedule] = useState({
     location: "City Hospital, Building A",
     timing: "9:00 AM - 5:00 PM",
     maxAppointments: "20",
     fee: "50",
-  })
+  });
 
   const specializations = [
     "Cardiologist",
@@ -48,17 +74,17 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
     "Gynecologist",
     "ENT Specialist",
     "Ophthalmologist",
-  ]
+  ];
 
   const handleEditSave = () => {
-    setProfileData(editData)
-    setIsEditModalOpen(false)
-  }
+    setProfileData(editData);
+    setIsEditModalOpen(false);
+  };
 
   const handleEditCancel = () => {
-    setEditData(profileData)
-    setIsEditModalOpen(false)
-  }
+    setEditData(profileData);
+    setIsEditModalOpen(false);
+  };
 
   return (
     <div className="max-w-5xl mx-auto space-y-4 md:space-y-6">
@@ -69,10 +95,14 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
             Welcome back, Dr. {profileData.name}!
           </h1>
           <p className="text-primary-foreground/80 mb-4 md:mb-6 max-w-xl text-sm md:text-base">
-            Manage your appointments, update your schedule, and connect with patients seamlessly through your
-            personalized dashboard.
+            Manage your appointments, update your schedule, and connect with
+            patients seamlessly through your personalized dashboard.
           </p>
-          <Button variant="secondary" onClick={onViewAppointments} className="text-sm md:text-base">
+          <Button
+            variant="secondary"
+            onClick={onViewAppointments}
+            className="text-sm md:text-base"
+          >
             View Scheduled Appointments
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
@@ -81,8 +111,15 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
 
       <Card>
         <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <CardTitle className="text-lg md:text-xl">Doctor Information</CardTitle>
-          <Button variant="outline" size="sm" onClick={() => setIsEditModalOpen(true)} className="w-full sm:w-auto">
+          <CardTitle className="text-lg md:text-xl">
+            Doctor Information
+          </CardTitle>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsEditModalOpen(true)}
+            className="w-full sm:w-auto"
+          >
             <Pencil className="w-4 h-4 mr-2" />
             Edit Profile
           </Button>
@@ -103,14 +140,22 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
             {/* Info - Center text on mobile */}
             <div className="flex-1 space-y-3 md:space-y-4 text-center sm:text-left">
               <div>
-                <h2 className="text-xl md:text-2xl font-bold">Dr. {profileData.name}</h2>
-                <p className="text-primary font-medium text-sm md:text-base">{profileData.specialization}</p>
+                <h2 className="text-xl md:text-2xl font-bold">
+                  Dr. {profileData.name}
+                </h2>
+                <p className="text-primary font-medium text-sm md:text-base">
+                  {profileData.specialization}
+                </p>
               </div>
-              <p className="text-muted-foreground text-sm md:text-base">{profileData.description}</p>
+              <p className="text-muted-foreground text-sm md:text-base">
+                {profileData.description}
+              </p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-3 md:gap-4 text-xs md:text-sm">
                 <div className="flex items-center gap-1.5 md:gap-2 text-muted-foreground">
                   <Mail className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  <span className="truncate max-w-[150px] sm:max-w-none">{user.email}</span>
+                  <span className="truncate max-w-[150px] sm:max-w-none">
+                    {user.email}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1.5 md:gap-2 text-muted-foreground">
                   <Briefcase className="w-3.5 h-3.5 md:w-4 md:h-4" />
@@ -137,7 +182,9 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
               <Input
                 id="location"
                 value={schedule.location}
-                onChange={(e) => setSchedule({ ...schedule, location: e.target.value })}
+                onChange={(e) =>
+                  setSchedule({ ...schedule, location: e.target.value })
+                }
                 className="text-sm md:text-base"
               />
             </div>
@@ -149,7 +196,9 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
               <Input
                 id="timing"
                 value={schedule.timing}
-                onChange={(e) => setSchedule({ ...schedule, timing: e.target.value })}
+                onChange={(e) =>
+                  setSchedule({ ...schedule, timing: e.target.value })
+                }
                 className="text-sm md:text-base"
               />
             </div>
@@ -161,7 +210,9 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
                 id="max"
                 type="number"
                 value={schedule.maxAppointments}
-                onChange={(e) => setSchedule({ ...schedule, maxAppointments: e.target.value })}
+                onChange={(e) =>
+                  setSchedule({ ...schedule, maxAppointments: e.target.value })
+                }
                 className="text-sm md:text-base"
               />
             </div>
@@ -174,7 +225,9 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
                 id="fee"
                 type="number"
                 value={schedule.fee}
-                onChange={(e) => setSchedule({ ...schedule, fee: e.target.value })}
+                onChange={(e) =>
+                  setSchedule({ ...schedule, fee: e.target.value })
+                }
                 className="text-sm md:text-base"
               />
             </div>
@@ -214,15 +267,17 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
                   className="hidden"
                   accept="image/*"
                   onChange={(e) => {
-                    const file = e.target.files?.[0]
+                    const file = e.target.files?.[0];
                     if (file) {
-                      const url = URL.createObjectURL(file)
-                      setEditData({ ...editData, profileImage: url })
+                      const url = URL.createObjectURL(file);
+                      setEditData({ ...editData, profileImage: url });
                     }
                   }}
                 />
               </div>
-              <p className="text-xs md:text-sm text-muted-foreground">Click camera icon to change photo</p>
+              <p className="text-xs md:text-sm text-muted-foreground">
+                Click camera icon to change photo
+              </p>
             </div>
 
             <div className="space-y-2">
@@ -232,7 +287,9 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
               <Input
                 id="edit-name"
                 value={editData.name}
-                onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+                onChange={(e) =>
+                  setEditData({ ...editData, name: e.target.value })
+                }
                 placeholder="Enter your name"
               />
             </div>
@@ -243,7 +300,9 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
               </Label>
               <Select
                 value={editData.specialization}
-                onValueChange={(value) => setEditData({ ...editData, specialization: value })}
+                onValueChange={(value) =>
+                  setEditData({ ...editData, specialization: value })
+                }
               >
                 <SelectTrigger id="edit-specialization">
                   <SelectValue placeholder="Select specialization" />
@@ -266,7 +325,9 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
                 id="edit-experience"
                 type="number"
                 value={editData.experience}
-                onChange={(e) => setEditData({ ...editData, experience: e.target.value })}
+                onChange={(e) =>
+                  setEditData({ ...editData, experience: e.target.value })
+                }
                 placeholder="Enter years of experience"
               />
             </div>
@@ -278,14 +339,20 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
               <Textarea
                 id="edit-description"
                 value={editData.description}
-                onChange={(e) => setEditData({ ...editData, description: e.target.value })}
+                onChange={(e) =>
+                  setEditData({ ...editData, description: e.target.value })
+                }
                 placeholder="Write about yourself..."
                 rows={4}
               />
             </div>
           </div>
           <DialogFooter className="flex-col sm:flex-row gap-2">
-            <Button variant="outline" onClick={handleEditCancel} className="w-full sm:w-auto bg-transparent">
+            <Button
+              variant="outline"
+              onClick={handleEditCancel}
+              className="w-full sm:w-auto bg-transparent"
+            >
               <X className="w-4 h-4 mr-2" />
               Cancel
             </Button>
@@ -297,5 +364,5 @@ export function DoctorProfile({ user, onViewAppointments }: DoctorProfileProps) 
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
